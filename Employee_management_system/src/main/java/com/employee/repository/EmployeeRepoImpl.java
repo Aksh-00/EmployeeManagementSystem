@@ -3,10 +3,14 @@ package com.employee.repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.employee.exception.EmployeeNotFoundException;
 import com.employee.models.Employee;
 
+@Repository
 public class EmployeeRepoImpl{
+	
 	@Autowired
 	private EmployeeRepository repo1;
 	
@@ -43,22 +47,21 @@ public class EmployeeRepoImpl{
 	
 	public Employee updateEmployee(long id, Employee employee)
 	{
-		Employee updateEmployee=repo1.findById(id)
-				.orElseThrow(()->new EmployeeNotFoundException("Employee not found with id: "+id));
-		
-		updateEmployee.setName(employee.getName());
-		updateEmployee.setDateOfJoining(employee.getDateOfJoining());
-		updateEmployee.setBasicPay(employee.getBasicPay());
-		updateEmployee.setHRA(employee.getHRA());
-		updateEmployee.setDA(employee.getDA());
-		updateEmployee.setGrossSalary(employee.getGrossSalary());
-		updateEmployee.setTax(employee.getTax());
-		updateEmployee.setNet(employee.getNet());
-		
-		repo1.save(updateEmployee);
-
-		return updateEmployee;
+		System.out.println("Inside repo");
+		Employee updateEmploye=repo1.findById(id).orElseThrow(()->new EmployeeNotFoundException("Employee not found with id: "+id));
+		updateEmploye.setName(employee.getName());
+		updateEmploye.setDateOfJoining(employee.getDateOfJoining());
+		updateEmploye.setBasicPay(employee.getBasicPay());
+		updateEmploye.setHRA(employee.getHRA());
+		updateEmploye.setDA(employee.getDA());
+		updateEmploye.setGrossSalary(employee.getGrossSalary());
+		updateEmploye.setTax(employee.getTax());
+		updateEmploye.setNet(employee.getNet());
+		repo1.save(updateEmploye);
+		System.out.println("Updated");
+		return updateEmploye;
 	}
+	
 	public List<Employee> findAll() {
 		List<Employee> ListAll = (List<Employee>) repo1.findAll();
 		return ListAll;

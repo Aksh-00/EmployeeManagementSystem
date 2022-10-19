@@ -3,23 +3,75 @@ package com.employee.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.employee.models.Employee;
+import com.employee.repository.EmployeeRepoImpl;
 
-public interface EmployeeService {
 
-	public ArrayList<Employee> listAllEmployees();
+@Service
+public class EmployeeService
+{
+
+	@Autowired
+	private EmployeeRepoImpl repo;
 	
-	public List<Employee> findEmployeeByName(String name);
+	//List all employees in table
+
+	public ArrayList<Employee> listAllEmployees()
+	{
+		return (ArrayList<Employee>) repo.findAll();
+	}
 	
-	public void insertEmployee(Employee employee);
+	//find employee using name
+
+	public List<Employee> findEmployeeByName(String name)
+	{
+	    return repo.findEmployeeByName(name);
+	}
 	
-	public ResponseEntity<Employee> findOneEmployee(long id);
+	//insert an employee into table
+
+	public void insertEmployee(Employee employee)
+	{
+		repo.insert(employee);
+	}
+
+	//find employee using id
+
+	public ResponseEntity<Employee> findOneEmployee(long id)
+	{
+		Employee employee=repo.findEmployeeById(id);
+				
+		
+		return ResponseEntity.ok(employee);
+	}
+ 
+	//delete employee using id
+
+		public void deleteEmployeeById(long id)
+		{
+			Employee employee=repo.findEmployeeById(id);
+			repo.delete(employee);
+			
+		}
+		
+		//delete all employees
+
+		public void deleteAllEmployees() {
+			repo.deleteAll();
+		}
+		
+		//update employee details
 	
-	public void deleteEmployeeById(long id);
-	
-	public void deleteAllEmployees();
-	
-	public ResponseEntity<Employee> updateEmployee(long id,Employee employee);
+		public ResponseEntity<Employee> updateEmployee(long id, Employee employee)
+		{
+			System.out.println("Calling update repo");
+			Employee update=repo.updateEmployee(id, employee);
+
+			return ResponseEntity.ok(update);
+		}
+		
 }
