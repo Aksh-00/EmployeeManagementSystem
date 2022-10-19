@@ -74,6 +74,4 @@ public class Employee {
 	public void setNet(double net) {
 		this.net = net;
 	}
-	
-	
 }

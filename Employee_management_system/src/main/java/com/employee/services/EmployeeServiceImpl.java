@@ -23,26 +23,28 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Autowired
 	private EmployeeRepository repo;
 	
+	//List all employees in table
 	@Override
 	public ArrayList<Employee> listAllEmployees()
 	{
 		return (ArrayList<Employee>) repo.findAll();
 	}
 	
+	//find employee using name
 	@Override
 	public List<Employee> findEmployeeByName(String name)
 	{
 	    return (List<Employee>) repo.findByName(name);
 	}
 	
-
+	//insert an employee into table
 	@Override
 	public void insertEmployee(Employee employee)
 	{
 		this.repo.save(employee);
 	}
 
-
+	//find employee using id
 	@Override
 	public ResponseEntity<Employee> findOneEmployee(long id)
 	{
@@ -51,23 +53,8 @@ public class EmployeeServiceImpl implements EmployeeService
 		
 		return ResponseEntity.ok(employee);
 	}
-    
-//	//updated employee REST API
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Employee> updateEmployee(@PathVariable(name="id") long id,@RequestBody Employee employee)
-//	{
-//		Employee updateEmployee=repo.findById(id)
-//				.orElseThrow(()->new EmployeeNotFoundException("Employee not found with id: "+id));
-//		
-////		updateEmployee.setFirstname(employee.getFirstname());
-////		updateEmployee.setLastname(employee.getLastname());
-////		updateEmployee.setEmailId(employee.getEmailId());
-//		repo.save(updateEmployee);
-//		
-//		return ResponseEntity.ok(updateEmployee);
-//	}
-//	
-
+ 
+	//delete employee using id
 		@Override
 		public void deleteEmployeeById(long id)
 		{
@@ -78,11 +65,13 @@ public class EmployeeServiceImpl implements EmployeeService
 			
 		}
 		
+		//delete all employees
 		@Override
 		public void deleteAllEmployees() {
 			repo.deleteAll();
 		}
 		
+		//update employee details
 		@Override
 		public ResponseEntity<Employee> updateEmployee(long id, Employee employee)
 		{
@@ -102,6 +91,5 @@ public class EmployeeServiceImpl implements EmployeeService
 
 			return ResponseEntity.ok(updateEmployee);
 		}
-		
 		
 }

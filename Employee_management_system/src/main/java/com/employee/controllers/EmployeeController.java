@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.models.Employee;
+import com.employee.models.EmployeeBO;
 import com.employee.services.EmployeeService;
 
 
@@ -27,11 +28,30 @@ public class EmployeeController
 
 		@Autowired
 		private EmployeeService service;
-	
+		
 		@PostMapping("/insertEmployee")
-		public void insertEmployee(@RequestBody Employee employee)
+		public ResponseEntity<Employee>insertEmployee(@RequestBody Employee employee)
 		{
 			service.insertEmployee(employee);
+			EmployeeBO emp=new EmployeeBO();
+			double basic=employee.getBasicPay();
+			long id=employee.getId();
+			double hra=emp.hRA(basic);
+			double da=emp.dA(basic);
+			double gross=emp.grossSal(basic, hra, da);
+			double tax=emp.tax(gross, basic);
+			double net=emp.net(gross, tax);
+			Employee update=new Employee();
+			update.setBasicPay(basic);
+			update.setName(employee.getName());
+			update.setDateOfJoining(employee.getDateOfJoining());
+			update.setId(employee.getId());
+			update.setGrossSalary(gross);
+			update.setHRA(hra);
+			update.setDA(da);
+			update.setTax(tax);
+			update.setNet(net);
+			return service.updateEmployee(id, update);
 		}
 
 
