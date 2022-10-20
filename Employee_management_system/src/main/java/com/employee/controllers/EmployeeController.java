@@ -16,8 +16,6 @@ import com.employee.models.Employee;
 import com.employee.models.EmployeeBO;
 import com.employee.services.EmployeeService;
 
-
-
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController 
@@ -51,7 +49,7 @@ public class EmployeeController
 			update.setNet(net);
 			System.out.println("About to update");
 			
-			return service.updateEmployee(update.getId(), update);
+			return service.insertEmployee(update);
 		}
 
 
@@ -61,20 +59,41 @@ public class EmployeeController
 		return service.listAllEmployees();
 	}
 
-	@DeleteMapping("/employees/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteEmployeeById (@PathVariable int id) {
 		service.deleteEmployeeById(id);
 	}
 	
-	@DeleteMapping("/employees")
+	@DeleteMapping("/deleteAll")
 	public void deleteAllEmployees() {
 		service.deleteAllEmployees();
 	}
 	
 	@PutMapping("/update/{id}")
 	public void updateEmployee(@PathVariable(value="id") long id,@RequestBody Employee employee) {
+		EmployeeBO emp=new EmployeeBO();
+		double basic=employee.getBasicPay();
+		double hra=emp.hRA(basic);
+		double da=emp.dA(basic);
+		double gross=emp.grossSal(basic, hra, da);
+		double tax=emp.tax(gross, basic);
+		double net=emp.net(gross, tax);
+		employee.setDA(da);
+		employee.setGrossSalary(gross);
+		employee.setHRA(hra);
+		employee.setTax(tax);
+		employee.setNet(net);
 		service.updateEmployee(id, employee);
 	}
-
+	
+	@GetMapping("/findByName/{name}")
+	public List<Employee> findByName(@PathVariable(value="name") String name) {
+		return service.findEmployeeByName(name);
+	}
+	
+	@GetMapping("/findByID/{id}")
+	public Employee findByID(@PathVariable(value="id") long id) {
+		return service.findOneEmployee(id);
+	}
 }
 

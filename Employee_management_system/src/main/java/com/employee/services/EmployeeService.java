@@ -33,20 +33,21 @@ public class EmployeeService
 	}
 	
 	//insert an employee into table
-
-	public void insertEmployee(Employee employee)
+	public ResponseEntity<Employee> insertEmployee(Employee employee)
 	{
 		repo.insert(employee);
+		return ResponseEntity.ok(employee);
 	}
+
 
 	//find employee using id
 
-	public ResponseEntity<Employee> findOneEmployee(long id)
+	public Employee findOneEmployee(long id)
 	{
 		Employee employee=repo.findEmployeeById(id);
 				
 		
-		return ResponseEntity.ok(employee);
+		return employee;
 	}
  
 	//delete employee using id

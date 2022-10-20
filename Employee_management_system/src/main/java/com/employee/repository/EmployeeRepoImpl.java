@@ -41,8 +41,9 @@ public class EmployeeRepoImpl{
 		repo1.delete(employee);
 	}
 	
-	public void insert(Employee emp) {
+	public Employee insert(Employee emp) {
 		repo1.save(emp);
+		return emp;
 	}
 	
 	public Employee updateEmployee(long id, Employee employee)

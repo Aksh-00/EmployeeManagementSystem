@@ -1,6 +1,7 @@
 package com.employee.models;
 
 public class EmployeeBO {
+
 	public double dA( double basicPay) {
 	
 		double da=0.4*basicPay;
