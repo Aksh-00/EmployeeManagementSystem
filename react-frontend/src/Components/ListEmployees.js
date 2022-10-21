@@ -88,7 +88,7 @@ const ListEmployees = () => {
       aria-label="Search" aria-describedby="search-addon"
       value={searchTerm}
       onChange={(e)=>searchByNameHandler(e)}/> 
-      <button type="button" class="btn btn-primary mb-2" disabled>Search</button>
+      <button type="button" class="btn btn-primary mb-2">Search</button>
     </div>
 
     {/* Search By Id */}
