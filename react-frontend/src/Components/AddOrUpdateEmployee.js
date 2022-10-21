@@ -4,13 +4,12 @@ import EmployeeService from '../Services/EmployeeService'
 import {useHistory,Link,useParams} from 'react-router-dom'
 const AddOrUpdateEmployee = () => 
 {
-
     const [name,setName]=useState('')
     const [dateOfJoining,setDateOfJoining]=useState('')
     const [basicPay,setBasicPay]=useState('')
     const history=useHistory();
     const {id}=useParams();
-
+    
     useEffect(() => {
 
         EmployeeService.getEmployeeById(id).then((response) =>{
@@ -97,7 +96,7 @@ const title=()=>{
                                     <label className = "form-label"> Basic Pay :</label>
                                     <input
                                         type = "text"
-                                        placeholder = "Enter email Id"
+                                        placeholder = "Enter basic pay per year"
                                         name = "basicPay"
                                         className = "form-control"
                                         value={basicPay}

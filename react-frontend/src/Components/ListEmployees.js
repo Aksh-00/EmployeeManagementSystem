@@ -39,7 +39,15 @@ const ListEmployees = () => {
   return (
     <div className = "container">
     <h2 className = "text-center"> List Employees </h2>
-    <Link to="/add-employee" className='btn btn-primary mb-2'>Add Employee</Link>
+    <div class="findButton1">
+      <Link to="/add-employee" className='btn btn-primary mb-2'>Add Employee</Link>
+    </div>
+
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Enter Name or ID" aria-label="Search" aria-describedby="search-addon" />
+      <button type="button" class="btn btn-primary mb-2">search</button>
+    </div>
+
     <table className="table table-bordered table-striped">
         <thead>
             <th> Employee Id </th>
