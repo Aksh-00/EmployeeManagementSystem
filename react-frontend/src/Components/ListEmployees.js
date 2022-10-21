@@ -68,7 +68,7 @@ const ListEmployees = () => {
                     <tr key = {employee.id}> 
                         <td> {employee.id} </td>
                         <td> {employee.name} </td>
-                        <td>{employee.dateOfJoining}</td>
+                        <td>{employee.dateOfJoining.replace('-', '/').split('T')[0].replace('-', '/')}</td>
                         <td>{employee.basicPay}</td>
                         <td>{employee.da}</td>
                         <td>{employee.hra}</td>

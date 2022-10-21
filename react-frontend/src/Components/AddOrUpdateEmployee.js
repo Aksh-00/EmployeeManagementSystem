@@ -2,10 +2,15 @@ import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import EmployeeService from '../Services/EmployeeService'
 import {useHistory,Link,useParams} from 'react-router-dom'
+
+import DatePicker from 'react-datepicker';  
+   
+import "react-datepicker/dist/react-datepicker.css";  
+
 const AddOrUpdateEmployee = () => 
 {
     const [name,setName]=useState('')
-    const [dateOfJoining,setDateOfJoining]=useState('')
+    const [dateOfJoining,setDateOfJoining]=useState(new Date())
     const [basicPay,setBasicPay]=useState('')
     const history=useHistory();
     const {id}=useParams();
@@ -14,7 +19,7 @@ const AddOrUpdateEmployee = () =>
 
         EmployeeService.getEmployeeById(id).then((response) =>{
             setName(response.data.name)
-            setDateOfJoining(response.data.dateOfJoining)
+            setDateOfJoining(new Date(response.data.dateOfJoining))
             setBasicPay(response.data.basicPay)
             console.log(name+" "+dateOfJoining)
         }).catch(error => {
@@ -81,7 +86,8 @@ const title=()=>{
 
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Date of Joining :</label>
-                                    <input
+                                    
+                                    {/* <input
                                         type = "text"
                                         placeholder = "Enter date of joining"
                                         name = "datOfJoining"
@@ -89,7 +95,18 @@ const title=()=>{
                                         value={dateOfJoining}
                                         onChange = {(e) => setDateOfJoining(e.target.value)}
                                     >
-                                    </input>
+                                    </input> */}
+                                    <DatePicker  
+                                        selected={ dateOfJoining }  
+                                        onChange={(date)=>setDateOfJoining(date)}  
+                                        name="dateOfJoining"  
+                                        dateFormat="dd/MM/yyyy" 
+                                        maxDate={new Date()} 
+                                        filterDate={date=>date.getDay()!==6&&date.getDay()!==0}
+                                        isClearable
+                                        showYearDropdown
+                                        scrollableMonthYearDropdown
+                                     />  
                                 </div>
 
                                 <div className = "form-group mb-2">
