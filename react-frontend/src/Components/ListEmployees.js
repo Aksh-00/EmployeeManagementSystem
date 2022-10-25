@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import EmployeeService from '../Services/EmployeeService'
@@ -59,8 +58,8 @@ const ListEmployees = () => {
       {/* <button type="button" class="btn btn-primary mb-2" onClick={searchByIdHandler}>Search</button> */}
     </div>
 
-    <table className="table table-bordered table-striped">
-        <thead>
+    <table className="table table-bordered table-striped table-hover table-sm" cellSpacing="0" width="100%">
+        <thead class="p-3 mb-2 bg-dark text-white">
             <th> Employee Id </th>
             <th> Name</th>
             <th> Date of Joining</th>
@@ -99,8 +98,11 @@ const ListEmployees = () => {
                         <td>{employee.grossSalary}</td>
                         <td>{employee.tax}</td>
                         <td>{employee.net}</td>
-                        <td><Link to={`/update-employee/${employee.id}`} className='btn btn-primary mb-2'>Update</Link>
+                        {/*<td><Link to={`/update-employee/${employee.id}`} className='btn btn-primary mb-2'>Update</Link>
                         <button className='btn btn-danger' style={{marginLeft:"10px"}} onClick={()=>deleteEmployee(employee.id)}>Delete</button>
+                    */}
+                    <td><Link to={`/update-employee/${employee.id}`} className='btn btn-primary mb-2'><span class="bi bi-pencil-square"></span></Link>
+                        <button type="button" class='btn btn-link' style={{marginLeft:"10px"}} onClick={()=>deleteEmployee(employee.id)}><span class="bi bi-trash-fill" style={{color:"red"}}></span></button>
                         </td>
                     </tr>
                 )
