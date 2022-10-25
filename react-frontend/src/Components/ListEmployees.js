@@ -7,7 +7,6 @@ const ListEmployees = () => {
   const [employees, setEmployees] = useState([])
   
   const [searchTerm,setSearchTerm]=useState("")
-  const [searchResults,setSearchResults]=useState([])
   
   useEffect(() => {
         console.log(searchTerm)
@@ -49,9 +48,9 @@ const ListEmployees = () => {
 
     {/* Search By Id */}
     <div className="input-group">
-      <input type="search" className="form-control rounded" placeholder="Enter ID to search"
+      <input type="search" className="form-control rounded" placeholder="Search Employee by ID, Name or DateOfJoining"
       aria-label="Search" aria-describedby="search-addon"
-      id='searchId'
+      id='search'
       value={searchTerm}
       onChange={(e)=>setSearchTerm(e.target.value)}
       /> 
@@ -73,17 +72,19 @@ const ListEmployees = () => {
         </thead>
         <tbody>
             {
-                
-                    employees.filter((val)=>{
+                    //filter to search employee by Id,name,dateofjoining
+                    employees.filter((employee)=>{
                       if(searchTerm==="")
                       {
-                        return val;
+                        return employee;
                       }
-                      else if
-                      (val.id.toString().includes(searchTerm.toLowerCase())||val.name.toLowerCase().includes(searchTerm.toLowerCase))
+                      else if(employee.id.toString().includes(searchTerm.toLowerCase())||
+                      employee.name.toLowerCase().includes(searchTerm.toLowerCase())||
+                      employee.dateOfJoining.replace('-', '/').split('T')[0].replace('-', '/').toLowerCase()
+                      .includes(searchTerm.toLowerCase()))
                       {
-                        // console.log(val.id+" "+searchTerm);
-                        return val;
+                        
+                        return employee;
                       }
                       
                     }).map(
