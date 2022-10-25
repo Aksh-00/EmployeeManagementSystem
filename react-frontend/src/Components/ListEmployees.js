@@ -9,7 +9,7 @@ const ListEmployees = () => {
   
   const [searchTerm,setSearchTerm]=useState("")
   const [searchResults,setSearchResults]=useState([])
-  const [searchId,setSearchId]=useState("")
+  
   useEffect(() => {
         console.log(searchTerm)
         getAllEmployees();
@@ -40,41 +40,7 @@ const ListEmployees = () => {
     })
 
   }
-  const searchByNameHandler=(e)=>{
-    console.log("SearchHandler invoked")
-    setSearchTerm(e.target.value);
-    console.log(searchTerm);
-    if(searchTerm!=="")
-    {
-      const newList=employees.filter((employee)=>{
-        return Object.values(employee)
-        .join(" ")
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      })
-      setSearchResults(newList)
-    }
-    else{
-      setSearchResults(employees)
-    }
-    console.log(searchResults)
-  }
   
-//   const searchByIdHandler=async()=>{
-//     if(searchId!==""){
-//       await EmployeeService.getEmployeeById(searchId)
-//       .then((response)=>{
-//       setSearchResults(response.data)
-//       console.log(searchResults)
-//       // setSearchId("")
-//     })
-//     .catch((err)=>{
-//       console.log(err)
-//     })
-//     }else{
-//       searchResults(employees)
-//     }
-// }
   return (
     <div className = "container">
     <h2 className = "text-center"> List Employees </h2>
@@ -82,25 +48,16 @@ const ListEmployees = () => {
       <Link to="/add-employee" className='btn btn-primary mb-2'>Add Employee</Link>
     </div>
 
-    {/* Search By Name */} 
-     <div className="input-group">
-      <input type="search" className="form-control rounded" placeholder="Enter name to search"
-      aria-label="Search" aria-describedby="search-addon"
-      value={searchTerm}
-      onChange={(e)=>searchByNameHandler(e)}/> 
-      <button type="button" class="btn btn-primary mb-2">Search</button>
-    </div>
-
     {/* Search By Id */}
-    {/* <div className="input-group">
+    <div className="input-group">
       <input type="search" className="form-control rounded" placeholder="Enter ID to search"
       aria-label="Search" aria-describedby="search-addon"
       id='searchId'
-      value={searchId}
-      onChange={(e)=>setSearchId(e.target.value)}
+      value={searchTerm}
+      onChange={(e)=>setSearchTerm(e.target.value)}
       /> 
-      <button type="button" class="btn btn-primary mb-2" onClick={searchByIdHandler}>Search</button>
-    </div> */}
+      {/* <button type="button" class="btn btn-primary mb-2" onClick={searchByIdHandler}>Search</button> */}
+    </div>
 
     <table className="table table-bordered table-striped">
         <thead>
@@ -118,7 +75,19 @@ const ListEmployees = () => {
         <tbody>
             {
                 
-                    (searchTerm.length<1?employees:searchResults).map(
+                    employees.filter((val)=>{
+                      if(searchTerm==="")
+                      {
+                        return val;
+                      }
+                      else if
+                      (val.id.toString().includes(searchTerm.toLowerCase())||val.name.toLowerCase().includes(searchTerm.toLowerCase))
+                      {
+                        // console.log(val.id+" "+searchTerm);
+                        return val;
+                      }
+                      
+                    }).map(
                     employee =>
                     <tr key = {employee.id}> 
                         <td> {employee.id} </td>
