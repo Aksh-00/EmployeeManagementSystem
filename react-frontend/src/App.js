@@ -1,9 +1,7 @@
-
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import ListEmployees from './Components/ListEmployees';
 import HeaderComponent from './Components/HeaderComponent';
-import FooterComponent from './Components/FooterComponent';
 import AddOrUpdateEmployee from './Components/AddOrUpdateEmployee';
 import FindEmployee from './Components/FindEmployee';
 
@@ -23,7 +21,6 @@ function App() {
         <Route path="/find-by-name/:name"><FindEmployee/></Route>
       </Switch>
       </div>
-      {/* <FooterComponent/> */}
 
       </Router>
       </div>

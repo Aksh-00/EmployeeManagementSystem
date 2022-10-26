@@ -7,7 +7,7 @@ const HeaderComponent = () => {
             <header>
                 <nav className = "navbar navbar-expand-md navbar-dark bg-primary">
                     <div>
-                         <h4 className='text-white'>Employee Management Application</h4>    
+                         <h4 className='text-white'><span style={{ fontWeight: 'bold' }}>Employee Management Application</span></h4>    
                     </div>
 
                 </nav>

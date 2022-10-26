@@ -48,7 +48,9 @@ const ListEmployees = () => {
   return (
     
     <div className = "container">
-    <h2 className = "text-center"> List Employees </h2>
+      <br></br>
+    <h2 className = "text-center"> List of Employees </h2>
+
 
     {/* Input field to Add new employee */}
     <div class="findButton1">
@@ -57,7 +59,7 @@ const ListEmployees = () => {
 
     {/* Input field to search employee by Id, Name or Date of Joining  */}
     <div className="input-group">
-      <input type="search" className="form-control rounded" placeholder="Search Employee by ID, Name or DateOfJoining"
+      <input type="search" className="form-control rounded" placeholder="Search Employee by ID, Name or Date Of Joining"
       aria-label="Search" aria-describedby="search-addon"
       id='search'
       value={searchTerm}
@@ -96,7 +98,7 @@ const ListEmployees = () => {
                         
                         return employee;
                       }
-                      
+                      return null;
                     }).map( 
 
                     //displays employee detail in tabular format

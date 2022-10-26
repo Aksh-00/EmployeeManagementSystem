@@ -36,8 +36,8 @@
 
 
 .input-group{
-  width: 500px;
-  left:55%;
+  width: 450px;
+  left:60%;
   bottom:55px;
   padding: 10px;
 }
@@ -48,4 +48,5 @@
 
 .button{
   height:30px;
+  font-weight: bold;
 }
