@@ -12,7 +12,7 @@ import com.employee.repository.EmployeeRepoImpl;
 
 
 @Service
-public class EmployeeService
+public class EmployeeService//Service Provider Class
 {
 
 	@Autowired

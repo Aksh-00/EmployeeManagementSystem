@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication//Main Class
 @ComponentScan({"com.employee","com.employee.controllers","com.employee.exception","com.employee.models","com.employee.repository","com.employee.services"})
 public class EmployeeManagementSystemApplication{
 

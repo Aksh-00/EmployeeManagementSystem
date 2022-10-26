@@ -9,7 +9,8 @@ import com.employee.exception.EmployeeNotFoundException;
 import com.employee.models.Employee;
 
 @Repository
-public class EmployeeRepoImpl{
+public class EmployeeRepoImpl{//Provides mechanism for Storage,Retrieval,search,update 
+	//and delete operations on objects
 	
 	@Autowired
 	private EmployeeRepository repo1;
