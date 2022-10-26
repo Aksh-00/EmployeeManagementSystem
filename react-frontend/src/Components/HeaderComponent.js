@@ -1,14 +1,13 @@
 import React from 'react'
 
+//Header component
 const HeaderComponent = () => {
     return (
         <div>
             <header>
                 <nav className = "navbar navbar-expand-md navbar-dark bg-primary">
                     <div>
-                        <a href = "https://javaguides.net" className = "navbar-brand">
-                            Employee Management Application
-                        </a>
+                         <h4 className='text-white'>Employee Management Application</h4>    
                     </div>
 
                 </nav>
