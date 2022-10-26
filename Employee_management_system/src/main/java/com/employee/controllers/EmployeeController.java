@@ -19,13 +19,13 @@ import com.employee.services.EmployeeService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/employees")
-public class EmployeeController 
+public class EmployeeController //Class implementing the CRUD operations
 {
 
 		@Autowired
 		private EmployeeService service;
 		
-		@PostMapping("/insertEmployee")
+		@PostMapping("/insertEmployee")//Adding an employee
 		public ResponseEntity<Employee>insertEmployee(@RequestBody Employee employee)
 		{
 			service.insertEmployee(employee);
@@ -54,23 +54,23 @@ public class EmployeeController
 		}
 
 
-	@GetMapping("/showAll")
+	@GetMapping("/showAll")//To show list of all existing employees
 	public ArrayList<Employee> listAllEmployees()
 	{
 		return service.listAllEmployees();
 	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")//Delete an employee by ID
 	public void deleteEmployeeById (@PathVariable int id) {
 		service.deleteEmployeeById(id);
 	}
 	
-	@DeleteMapping("/deleteAll")
+	@DeleteMapping("/deleteAll")//Deleting all exixting employees
 	public void deleteAllEmployees() {
 		service.deleteAllEmployees();
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/update/{id}")//Updating employee details by ID
 	public void updateEmployee(@PathVariable(value="id") long id,@RequestBody Employee employee) {
 		EmployeeBO emp=new EmployeeBO();
 		double basic=employee.getBasicPay();
@@ -87,12 +87,12 @@ public class EmployeeController
 		service.updateEmployee(id, employee);
 	}
 	
-	@GetMapping("/findByName/{name}")
+	@GetMapping("/findByName/{name}")//Searching for en employee by Name
 	public List<Employee> findByName(@PathVariable(value="name") String name) {
 		return service.findEmployeeByName(name);
 	}
 	
-	@GetMapping("/findByID/{id}")
+	@GetMapping("/findByID/{id}")//Searching for an employee by ID
 	public Employee findByID(@PathVariable(value="id") long id) {
 		return service.findOneEmployee(id);
 	}

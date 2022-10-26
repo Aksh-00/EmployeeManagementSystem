@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.*;
 @Entity
-@Table(name="employee")
+@Table(name="employee")//POJO Class
 public class Employee {
 
 	@Id
