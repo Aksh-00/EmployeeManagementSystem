@@ -122,8 +122,8 @@ const title=()=>{
                                     </input>
                                 </div>
                                 <div className='text-center'>
-                                <button className = "btn btn-success" onClick = {AddOrUpdate} >{id?"Update Employee": "Add Employee"}</button>
-                                <Link to="/employees" className="btn btn-danger"> Cancel </Link>
+                                <button className = "btn btn-success" data-testid="buttonForAddUpdate" onClick = {AddOrUpdate} >{id?"Update Employee": "Add Employee"}</button>
+                                <Link to="/employees" data-testid="cancelLink" className="btn btn-danger"> Cancel </Link>
                                 </div>
                                 
                             </form>
