@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import ListEmployees from './Components/ListEmployees';
 import HeaderComponent from './Components/HeaderComponent';
-//import FooterComponent from './Components/FooterComponent';
+import FooterComponent from './Components/FooterComponent';
 import AddOrUpdateEmployee from './Components/AddOrUpdateEmployee';
 import FindEmployee from './Components/FindEmployee';
 

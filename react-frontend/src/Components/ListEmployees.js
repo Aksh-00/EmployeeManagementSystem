@@ -2,16 +2,21 @@ import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import EmployeeService from '../Services/EmployeeService'
 // import EmployeeService from '../Services/EmployeeService'
+
+
 const ListEmployees = () => {
 
   const [employees, setEmployees] = useState([])
   
+  //variable to store search Term
   const [searchTerm,setSearchTerm]=useState("")
   
   useEffect(() => {
         console.log(searchTerm)
         getAllEmployees();
     }, [])
+
+//function to list all the employees on home page
   const getAllEmployees = () => {
     EmployeeService.getAllEmployees()      
     .then((response) => {
@@ -26,7 +31,8 @@ const ListEmployees = () => {
           console.log(error);
       })
   }
-    
+  
+  //function to delete an employee by ID
   const deleteEmployee=(employeeId)=>{
     EmployeeService.deleteEmployee(employeeId)
     .then((response)=>{
@@ -40,13 +46,16 @@ const ListEmployees = () => {
   }
   
   return (
+    
     <div className = "container">
     <h2 className = "text-center"> List Employees </h2>
+
+    {/* Input field to Add new employee */}
     <div class="findButton1">
       <Link to="/add-employee" className='btn btn-primary mb-2'>Add Employee</Link>
     </div>
 
-    {/* Search By Id */}
+    {/* Input field to search employee by Id, Name or Date of Joining  */}
     <div className="input-group">
       <input type="search" className="form-control rounded" placeholder="Search Employee by ID, Name or DateOfJoining"
       aria-label="Search" aria-describedby="search-addon"
@@ -54,25 +63,26 @@ const ListEmployees = () => {
       value={searchTerm}
       onChange={(e)=>setSearchTerm(e.target.value)}
       /> 
-      {/* <button type="button" class="btn btn-primary mb-2" onClick={searchByIdHandler}>Search</button> */}
+      
     </div>
 
-    <table className="table table-bordered table-striped table-hover table-sm" cellSpacing="0" width="100%">
-        <thead class="p-3 mb-2 bg-dark text-white">
-            <th> Employee Id </th>
-            <th> Name</th>
-            <th> Date of Joining</th>
-            <th> Basic Pay</th>
-            <th> DA </th>
-            <th> HRA</th>
-            <th> Gross Salary</th>
-            <th> Tax</th>
-            <th> Net Salary</th>
-            <th>Action</th>
+    {/* Table to display all the employee details */}
+    <table className="table table-striped table-hover" >
+        <thead class="p-3 mb-5 bg-dark text-white text-center">
+            <th > Employee Id </th>
+            <th > Name</th>
+            <th > Date of Joining</th>
+            <th > Basic Pay</th>
+            <th > DA </th>
+            <th > HRA</th>
+            <th > Gross Salary</th>
+            <th > Tax</th>
+            <th > Net Salary</th>
+            <th >Action</th>
         </thead>
-        <tbody>
+        <tbody className='text-center'>
             {
-                    //filter to search employee by Id,name,dateofjoining
+                    //filter to search employee by Id,name,dateofjoining based on searchTerm
                     employees.filter((employee)=>{
                       if(searchTerm==="")
                       {
@@ -87,7 +97,9 @@ const ListEmployees = () => {
                         return employee;
                       }
                       
-                    }).map(
+                    }).map( 
+
+                    //displays employee detail in tabular format
                     employee =>
                     <tr key = {employee.id}> 
                         <td> {employee.id} </td>
@@ -102,6 +114,8 @@ const ListEmployees = () => {
                         {/*<td><Link to={`/update-employee/${employee.id}`} className='btn btn-primary mb-2'>Update</Link>
                         <button className='btn btn-danger' style={{marginLeft:"10px"}} onClick={()=>deleteEmployee(employee.id)}>Delete</button>
                     */}
+
+                    {/* buttons to update or delete an employee */}
                     <td><Link to={`/update-employee/${employee.id}`} className='btn btn-primary mb-2'><span class="bi bi-pencil-square"></span></Link>
                         <button type="button" class='btn btn-link' style={{marginLeft:"10px"}} onClick={()=>deleteEmployee(employee.id)}><span class="bi bi-trash-fill" style={{color:"red"}}></span></button>
                         </td>

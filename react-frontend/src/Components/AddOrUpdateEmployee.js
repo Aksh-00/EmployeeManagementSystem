@@ -16,7 +16,7 @@ const AddOrUpdateEmployee = () =>
     const {id}=useParams();
     
     useEffect(() => {
-
+        //Fetches employee details to be updated using ID
         EmployeeService.getEmployeeById(id).then((response) =>{
             setName(response.data.name)
             setDateOfJoining(new Date(response.data.dateOfJoining))
@@ -26,10 +26,14 @@ const AddOrUpdateEmployee = () =>
             console.log(error)
         })
     }, [])
+
+    //function to add or update employee
     const AddOrUpdate=(e)=>{
         e.preventDefault();
         const employee={name,dateOfJoining,basicPay}
         console.log(employee);
+
+        //updates the employee details if employee ID exits
         if(id)
         {
             EmployeeService.updateEmployee(id,employee)
@@ -43,6 +47,7 @@ const AddOrUpdateEmployee = () =>
         }
         else
         {
+        //if employee doesnot exists, employee will be added as new one
         EmployeeService.createEmployee(employee)
         .then(response=>{
             console.log(response.data)
@@ -54,7 +59,7 @@ const AddOrUpdateEmployee = () =>
         }
     }
 
-    
+//function to change title dynamically    
 const title=()=>{
     return id?<h2 className="text-center">Update Employee</h2>:<h2 className="text-center">Add Employee</h2>;
 }
@@ -69,8 +74,10 @@ const title=()=>{
                        {
                         title()
                        }
+                       
                         <div className = "card-body">
                             <form>
+                                {/* Input field to get employee name */}
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Name :</label>
                                     <input
@@ -84,18 +91,10 @@ const title=()=>{
                                     </input>
                                 </div>
 
+                                {/* Input field to get date of joining */}
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Date of Joining :</label>
                                     
-                                    {/* <input
-                                        type = "text"
-                                        placeholder = "Enter date of joining"
-                                        name = "datOfJoining"
-                                        className = "form-control"
-                                        value={dateOfJoining}
-                                        onChange = {(e) => setDateOfJoining(e.target.value)}
-                                    >
-                                    </input> */}
                                     <DatePicker  
                                         selected={ dateOfJoining }  
                                         onChange={(date)=>setDateOfJoining(date)}  
@@ -108,7 +107,7 @@ const title=()=>{
                                         scrollableMonthYearDropdown
                                      />  
                                 </div>
-
+                                {/* Input field to get basic pay */}
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Basic Pay :</label>
                                     <input
@@ -121,6 +120,7 @@ const title=()=>{
                                     >
                                     </input>
                                 </div>
+                                {/* Button to add,update or cancel */}
                                 <div className='text-center'>
                                 <button className = "btn btn-success" onClick = {AddOrUpdate} >{id?"Update Employee": "Add Employee"}</button>
                                 <Link to="/employees" className="btn btn-danger"> Cancel </Link>
