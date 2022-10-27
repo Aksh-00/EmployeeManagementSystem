@@ -11,7 +11,7 @@ afterEach(() => {
 })
 
 describe("Add or update employees",()=>{
-    const title=jest.fn();
+    const title=jest.fn(); //mock jest function
     render(
                          <form data-testid="form" onSubmit={title}>
                              <div >
