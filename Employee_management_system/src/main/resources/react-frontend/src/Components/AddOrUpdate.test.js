@@ -5,6 +5,7 @@ import '@testing-library/jest-dom';
 import FindEmployee from "./FindEmployee";
 import HeaderComponent from "./HeaderComponent";
 // afterEach function runs after each test suite is executed
+
 afterEach(() => {
     cleanup(); // Resets the DOM after each test suite
 })
@@ -55,7 +56,6 @@ describe("Add or update employees",()=>{
     const ip1=screen.getByPlaceholderText("Enter name");
     const ip2=screen.getByPlaceholderText("Enter basic pay per year");
 
-
     // Test 1
     test("Rendering", () => {
         expect(button).toBeInTheDocument(); 
@@ -81,7 +81,6 @@ describe("Add or update employees",()=>{
         fireEvent.submit(form);
         fireEvent.change(ip1);
         fireEvent.change(ip2);
-
     })
 })
 
