@@ -2,7 +2,7 @@ import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 // Importing the jest testing library
 
 import '@testing-library/jest-dom'; 
-import FindEmployee from "./FindEmployee";
+
 import HeaderComponent from "./HeaderComponent";
 // afterEach function runs after each test suite is executed
 
@@ -81,15 +81,6 @@ describe("Add or update employees",()=>{
         fireEvent.submit(form);
         fireEvent.change(ip1);
         fireEvent.change(ip2);
-    })
-})
-
-describe("Find Employees",()=>{
-    render(<FindEmployee/>)
-    const heading=screen.findByRole('h1');
-    // Test 4
-    test("Check Find employee ",()=>{
-        expect(heading).toBeDefined();
     })
 })
 
